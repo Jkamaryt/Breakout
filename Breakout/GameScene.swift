@@ -12,6 +12,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var ball = SKShapeNode()
     var paddle = SKSpriteNode()
+    var brick = SKSpriteNode()
     var loseZone = SKSpriteNode()
     
     override func didMove(to view: SKView) {
@@ -27,6 +28,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // this stuff happens before each game starts
         makeBall()
         makePaddle()
+        makeBrick()
     }
     
     func kickBall() {
@@ -82,6 +84,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         paddle.physicsBody = SKPhysicsBody(rectangleOf: paddle.size)
         paddle.physicsBody?.isDynamic = false
         addChild(paddle)
+    }
+    
+    func makeBrick() {
+        brick.removeFromParent()    // remove the brick, if it exists
+        brick = SKSpriteNode(color: .blue, size: CGSize(width: 50, height: 20))
+        brick.position = CGPoint(x: frame.midX, y: frame.maxY - 50)
+        brick.name = "brick"
+        brick.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
+        brick.physicsBody?.isDynamic = false
+        addChild(brick)
     }
     
     func makeLoseZone() {
