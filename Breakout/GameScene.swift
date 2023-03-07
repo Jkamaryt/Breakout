@@ -8,22 +8,30 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var ball = SKShapeNode()
     var paddle = SKSpriteNode()
     var loseZone = SKSpriteNode()
     
     override func didMove(to view: SKView) {
+        physicsWorld.contactDelegate = self
+        self.physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
         createBackground()
         resetGame()
         makeLoseZone()
+        kickBall()
     }
     
     func resetGame() {
         // this stuff happens before each game starts
         makeBall()
         makePaddle()
+    }
+    
+    func kickBall() {
+        ball.physicsBody?.isDynamic = true
+        ball.physicsBody?.applyImpulse(CGVector(dx: 3, dy: 5))
     }
     
     func createBackground() {
@@ -84,5 +92,7 @@ class GameScene: SKScene {
         loseZone.physicsBody?.isDynamic = false
         addChild(loseZone)
     }
+    
+    
     
 }
