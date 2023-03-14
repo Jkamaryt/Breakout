@@ -15,6 +15,8 @@
 		F224B0DF29B798960006945C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F224B0DD29B798960006945C /* Main.storyboard */; };
 		F224B0E129B798970006945C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F224B0E029B798970006945C /* Assets.xcassets */; };
 		F224B0E429B798970006945C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F224B0E229B798970006945C /* LaunchScreen.storyboard */; };
+		F2407D3129C1054F002571F4 /* bam.wav in Resources */ = {isa = PBXBuildFile; fileRef = F2407D3029C1054F002571F4 /* bam.wav */; };
+		F255513F29B91DE70032F187 /* background.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F255513E29B91DE70032F187 /* background.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +29,8 @@
 		F224B0DE29B798960006945C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F224B0E029B798970006945C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F224B0E329B798970006945C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F2407D3029C1054F002571F4 /* bam.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bam.wav; sourceTree = "<group>"; };
+		F255513E29B91DE70032F187 /* background.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = background.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 				F224B0D529B798960006945C /* GameScene.sks */,
 				F224B0D729B798960006945C /* Actions.sks */,
 				F224B0D929B798960006945C /* GameScene.swift */,
+				F255513E29B91DE70032F187 /* background.mp3 */,
+				F2407D3029C1054F002571F4 /* bam.wav */,
 				F224B0DB29B798960006945C /* GameViewController.swift */,
 				F224B0DD29B798960006945C /* Main.storyboard */,
 				F224B0E029B798970006945C /* Assets.xcassets */,
@@ -133,7 +139,9 @@
 				F224B0D629B798960006945C /* GameScene.sks in Resources */,
 				F224B0E129B798970006945C /* Assets.xcassets in Resources */,
 				F224B0E429B798970006945C /* LaunchScreen.storyboard in Resources */,
+				F255513F29B91DE70032F187 /* background.mp3 in Resources */,
 				F224B0D829B798960006945C /* Actions.sks in Resources */,
+				F2407D3129C1054F002571F4 /* bam.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

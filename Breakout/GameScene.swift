@@ -7,6 +7,7 @@
 
 import SpriteKit
 import GameplayKit
+import AVFoundation
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
@@ -14,6 +15,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var paddle = SKSpriteNode()
     var bricks = [SKSpriteNode]()
     var loseZone = SKSpriteNode()
+    
+    var backgroundMusicPlayer: AVAudioPlayer?
+    var soundPlayer: AVAudioPlayer?
     
     var playLabel = SKLabelNode()
     var livesLabel = SKLabelNode()
@@ -34,6 +38,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func resetGame() {
         // this stuff happens before each game starts
+        playSound(sound: "background", type: "mp3")
         makeBall()
         makePaddle()
         makeBricks()
@@ -88,7 +93,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // does not slow down over time
         ball.physicsBody?.linearDamping = 0
         ball.physicsBody?.contactTestBitMask = (ball.physicsBody?.collisionBitMask)!
-        addChild(ball)    // add ball object to the view
+        addChild(ball) // add ball object to the view
     }
     
     func makePaddle() {
@@ -135,7 +140,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel.fontSize = 18
         scoreLabel.fontColor = .black
         scoreLabel.fontName = "Arial"
-        scoreLabel.position = CGPoint(x: frame.maxX + 50, y: frame.minY + 18)
+        scoreLabel.position = CGPoint(x: frame.maxX - 50, y: frame.minY + 18)
+        addChild(scoreLabel)
+        
     }
     
     func makeBricks() {
@@ -196,18 +203,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for brick in bricks {
             if contact.bodyA.node == brick ||
                 contact.bodyB.node == brick {
+                playSound2(sound: "bam", type: "wav")
                 score += 1
                 // increase ball velocity by 2%
                 ball.physicsBody!.velocity.dx *= CGFloat(1.02)
                 ball.physicsBody!.velocity.dy *= CGFloat(1.02)
+    
                 updateLabels()
+                
                 if brick.color == .blue {
+                    
                     brick.color = .orange   // blue bricks turn orange
                 }
                 else if brick.color == .orange {
+                    
                     brick.color = .green   //orange bricks turn green
                 }
-                else {      // must be a green brick, which get removed
+                else {
+                    // must be a green brick, which get removed
                     brick.removeFromParent()
                     removedBricks += 1
                     if removedBricks == bricks.count {
@@ -227,6 +240,38 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             else {
                 gameOver(winner: false)
             }
+        }
+    }
+    
+  func didEnd(_ contact: SKPhysicsContact) {
+        if lives == 0 {
+            backgroundMusicPlayer?.stop()
+            playLabel.text = "Game Over"
+        }
+    }
+    
+    func playSound(sound: String, type: String) {
+        let path = Bundle.main.path(forResource: sound, ofType: type)!
+        let url = URL(fileURLWithPath: path)
+        do {
+            backgroundMusicPlayer = try AVAudioPlayer(contentsOf: url)
+            backgroundMusicPlayer?.numberOfLoops = -1 // loop indefinitely
+            backgroundMusicPlayer?.volume = 0.5
+            backgroundMusicPlayer?.play()
+        } catch {
+            // couldn't load file :(
+        }
+    }
+    
+    func playSound2(sound: String, type: String) {
+        let path = Bundle.main.path(forResource: sound, ofType: type)!
+        let url = URL(fileURLWithPath: path)
+        do {
+            soundPlayer = try AVAudioPlayer(contentsOf: url)
+            soundPlayer?.volume = 0.9
+            soundPlayer?.play()
+        } catch {
+            // couldn't load file :(
         }
     }
     
